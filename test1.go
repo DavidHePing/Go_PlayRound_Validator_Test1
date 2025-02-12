@@ -2,6 +2,12 @@ package main
 
 import "github.com/go-playground/validator/v10"
 
+type User struct {
+	Username string `validate:"required,min=3,max=20"`
+	Email    string `validate:"required,email"`
+	Age      int    `validate:"gte=18,lte=60"` // Age must be between 18-60
+}
+
 func test1() {
 	validate := validator.New()
 
