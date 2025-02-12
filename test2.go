@@ -15,7 +15,7 @@ func test2() {
 	test := Test2{
 		Num2: 61,
 		Num3: 17,
-		Num4: -4,
+		Num4: 18, // equal is valid
 	}
 
 	errs := validate.Struct(test)
