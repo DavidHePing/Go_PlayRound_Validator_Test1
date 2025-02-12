@@ -2,28 +2,26 @@ package main
 
 import "github.com/go-playground/validator/v10"
 
-type Test2 struct {
-	Num1 int `required,validate:"min=18,max=60"` // required is useless
+type Test3 struct {
+	Num1 int `validate:"min=18,max=60"`
 	Num2 int `validate:"min=18,max=60"`
-	Num3 int `validate:"min=18,max=60"`
-	Num4 int `validate:"min=18,max=60"`
 }
 
-//test int
-func test2() {
+//customerize message
+func test3() {
 	validate := validator.New()
 
-	test := Test2{
+	test := Test3{
+		Num1: 17,
 		Num2: 61,
-		Num3: 17,
-		Num4: 18, // equal is valid
 	}
 
 	errs := validate.Struct(test)
 
 	if errs != nil {
 		for _, err := range errs.(validator.ValidationErrors) {
-			print("Field: ", err.Field(), ", Error: ", err.Tag())
+			print("Field: ", err.Field(), ", Error: ", err.Tag(),
+				", Threshold: ", err.Param(), ", Current Val: ", err.Value())
 			println("")
 		}
 	} else {
